@@ -1,0 +1,122 @@
+[gd_scene load_steps=8 format=3 uid="uid://2jnayay8fv7m"]
+
+[ext_resource type="Script" uid="uid://bucykmeetb4su" path="res://Scripts/Welcome.cs" id="1_058be"]
+[ext_resource type="Texture2D" uid="uid://dm1u1tu8uyrky" path="res://Assets/gui/menu/bg.png" id="2_30id6"]
+[ext_resource type="Texture2D" uid="uid://be5kmdn8cyqi3" path="res://Assets/gui/btn/faq.png" id="4_30id6"]
+[ext_resource type="PackedScene" uid="uid://drxh6sc78omsq" path="res://Scenes/gui/InteractiveIconButton.tscn" id="5_30id6"]
+[ext_resource type="Texture2D" uid="uid://gldmdm2ghti6" path="res://Assets/gui/btn/about.png" id="5_ooh06"]
+[ext_resource type="PackedScene" uid="uid://gwv7s0yte7b4" path="res://Scenes/gui/MenuTitle.tscn" id="6_a8035"]
+[ext_resource type="PackedScene" uid="uid://ct7pa6iarcpky" path="res://Scenes/gui/InteractiveTextButton.tscn" id="7_a8035"]
+
+[node name="Welcome" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_058be")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_30id6")
+expand_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainerLeft" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainerLeft"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HowToPlayBtn" parent="MarginContainer/HBoxContainer/VBoxContainerLeft/Control" instance=ExtResource("5_30id6")]
+layout_mode = 1
+texture_normal = ExtResource("4_30id6")
+
+[node name="AboutBtn" parent="MarginContainer/HBoxContainer/VBoxContainerLeft/Control" instance=ExtResource("5_30id6")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -120.0
+offset_bottom = 0.0
+grow_vertical = 0
+texture_normal = ExtResource("5_ooh06")
+
+[node name="VBoxContainerCenter" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Title" parent="MarginContainer/HBoxContainer/VBoxContainerCenter" instance=ExtResource("6_a8035")]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainerCenter"]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_right = 64
+
+[node name="Control" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainerCenter/MarginContainer"]
+layout_mode = 2
+
+[node name="PlayButton" parent="MarginContainer/HBoxContainer/VBoxContainerCenter/MarginContainer/Control" instance=ExtResource("7_a8035")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_right = 250.0
+offset_bottom = 80.0
+grow_horizontal = 2
+pivot_offset = Vector2(250, 40)
+theme_override_font_sizes/font_size = 64
+
+[node name="VBoxContainerRight" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainerRight"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ExitBtn" parent="MarginContainer/HBoxContainer/VBoxContainerRight/Control" instance=ExtResource("5_30id6")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -120.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainerLeft/Control/HowToPlayBtn" to="." method="_on_guide_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainerLeft/Control/AboutBtn" to="." method="_on_about_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainerRight/Control/ExitBtn" to="." method="_on_exit_btn_pressed"]

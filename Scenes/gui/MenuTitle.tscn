@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://gwv7s0yte7b4"]
+
+[ext_resource type="FontFile" uid="uid://iskq18vac3da" path="res://Assets/fonts/soupofjustice.ttf" id="1_b16hu"]
+
+[node name="Title" type="Label"]
+theme_override_colors/font_color = Color(0.3137255, 0.5647059, 0.12941177, 1)
+theme_override_colors/font_outline_color = Color(0.9490196, 1, 1, 0.7607843)
+theme_override_constants/outline_size = 32
+theme_override_fonts/font = ExtResource("1_b16hu")
+theme_override_font_sizes/font_size = 128
+text = "Outline Quest"
+horizontal_alignment = 1
+vertical_alignment = 1

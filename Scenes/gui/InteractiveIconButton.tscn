@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://drxh6sc78omsq"]
+
+[ext_resource type="Texture2D" uid="uid://brel8ikcpllo4" path="res://Assets/gui/btn/close_2.png" id="1_1x66n"]
+[ext_resource type="Script" uid="uid://kxtys6m07h0w" path="res://Scripts/gui/InteractiveButton.cs" id="2_6f2bj"]
+
+[node name="InteractiveButton" type="TextureButton"]
+offset_right = 120.0
+offset_bottom = 120.0
+pivot_offset = Vector2(60, 60)
+size_flags_horizontal = 8
+texture_normal = ExtResource("1_1x66n")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("2_6f2bj")
+
+[connection signal="button_down" from="." to="." method="_button_down"]
+[connection signal="button_up" from="." to="." method="_reset_button"]
+[connection signal="focus_entered" from="." to="." method="_start_hover"]
+[connection signal="focus_exited" from="." to="." method="_reset_button"]
+[connection signal="mouse_entered" from="." to="." method="_start_hover"]
+[connection signal="mouse_exited" from="." to="." method="_reset_button"]

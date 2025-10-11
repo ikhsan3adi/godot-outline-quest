@@ -1,0 +1,84 @@
+[gd_scene load_steps=9 format=3 uid="uid://dxn4pvqq76s1n"]
+
+[ext_resource type="Script" uid="uid://dtntl6odd268a" path="res://Scripts/About.cs" id="1_6oxj2"]
+[ext_resource type="Texture2D" uid="uid://dm1u1tu8uyrky" path="res://Assets/gui/menu/bg.png" id="2_7ngfu"]
+[ext_resource type="FontFile" uid="uid://iskq18vac3da" path="res://Assets/fonts/soupofjustice.ttf" id="3_ceh3k"]
+[ext_resource type="PackedScene" uid="uid://drxh6sc78omsq" path="res://Scenes/gui/InteractiveIconButton.tscn" id="3_wegk8"]
+[ext_resource type="Texture2D" uid="uid://d0adqljegxd4e" path="res://Assets/gui/shop/4.png" id="4_egbfi"]
+[ext_resource type="Texture2D" uid="uid://c3qucgrws7uou" path="res://Assets/gui/btn/prew.png" id="4_fd3f5"]
+[ext_resource type="PackedScene" uid="uid://gwv7s0yte7b4" path="res://Scenes/gui/MenuTitle.tscn" id="5_sbl4o"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wegk8"]
+texture = ExtResource("4_egbfi")
+texture_margin_left = 44.0
+texture_margin_top = 46.0
+texture_margin_right = 50.0
+texture_margin_bottom = 58.0
+
+[node name="About" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6oxj2")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -493.33337
+offset_bottom = 493.33337
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_7ngfu")
+expand_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Control" type="Control" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="InteractiveButton" parent="MarginContainer/Control" instance=ExtResource("3_wegk8")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -120.0
+offset_bottom = 0.0
+grow_vertical = 0
+texture_normal = ExtResource("4_fd3f5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Title" parent="MarginContainer/VBoxContainer" instance=ExtResource("5_sbl4o")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 96
+text = "About Author"
+
+[node name="About" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.14509805, 0.14509805, 0.14509805, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("3_ceh3k")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxTexture_wegk8")
+text = "Nama		: Ikhsan Satriadi
+NIM			: 241511080
+Kelas		: 2C
+Prodi		: D3 - Teknik Informatika"
+
+[connection signal="pressed" from="MarginContainer/Control/InteractiveButton" to="." method="_on_back_btn_pressed"]
