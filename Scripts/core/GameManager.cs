@@ -6,7 +6,7 @@ using System.Reflection;
 
 public partial class GameManager : Node2D
 {
-    private const float SNAP_DISTANCE_THRESHOLD = 20.0f;
+    private const float SNAP_DISTANCE_THRESHOLD = 10.0f;
     private const float SNAP_ANGLE_THRESHOLD = 7.0f; // toleransi snap sudut dalam derajat
     private const float ROTATION_INCREMENT_DEG = 5.0f; // derajat per scroll
 

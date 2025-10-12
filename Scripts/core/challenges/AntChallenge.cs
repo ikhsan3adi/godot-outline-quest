@@ -6,7 +6,7 @@ public class AntChallenge : Challenge
             new SquareBlock(new (0, PatternBlock.BASE_LENGTH / 2)),
             new SquareBlock(new (0, -PatternBlock.BASE_LENGTH / 2)),
             new HexagonBlock(new (0, - (PatternBlock.BASE_LENGTH + PatternBlock.TRIANGLE_HEIGHT))),
-            new HexagonBlock(new (0, PatternBlock.BASE_LENGTH * 2), rotationDeg: 30),
+            new HexagonBlock(new (0, PatternBlock.BASE_LENGTH * 2), rotationDeg: -30),
 
             // kaki kanan
             new DiamondBlock(new(

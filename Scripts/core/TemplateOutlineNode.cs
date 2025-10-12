@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public partial class TemplateOutlineNode : Node2D
 {
     private List<LineSegment> _segmentsToDraw = [];
-    private Color _outlineColor = Colors.DarkGray;
+    private Color _outlineColor = Colors.DimGray;
 
     private static readonly Primitif primitif = new Primitif();
 

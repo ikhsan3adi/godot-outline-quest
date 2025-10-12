@@ -41,13 +41,12 @@ abstract public class Challenge
 
                 var segment = new LineSegment(p1, p2);
 
-                // Tambahkan / update hitungan di dictionary
                 edgeCounts.TryGetValue(segment, out int currentCount);
                 edgeCounts[segment] = currentCount + 1;
             }
         }
 
-        // Filter untuk mendapatkan sisi yang hanya muncul sekali
+        // Filter
         Outlines = edgeCounts
             .Where(pair => pair.Value == 1)
             .Select(pair => pair.Key)

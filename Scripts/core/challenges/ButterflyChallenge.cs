@@ -18,8 +18,8 @@ public class ButterflyChallenge : Challenge
             new SquareBlock(new(0, -HALF_BASE)),
             new SquareBlock(new(0, -(HALF_BASE + BASE_LENGTH))),
             new TriangleBlock(
-                new(0, -(2 * BASE_LENGTH + TRIANGLE_H / 2)),
-                rotationDeg: 180
+                new(0, -2 * BASE_LENGTH - TRIANGLE_H / 3),
+                rotationDeg: -60
             ),
 
             // Antena
@@ -35,30 +35,30 @@ public class ButterflyChallenge : Challenge
             // Sayap kanan atas
             new HexagonBlock(
                 new(HALF_BASE + TRIANGLE_H, BASE_LENGTH),
-                rotationDeg: 90
+                rotationDeg: -30
             ),
             new TrapezoidBlock(
-                new(2.5f * TRIANGLE_H + BASE_LENGTH / 2, HALF_BASE + BASE_LENGTH),
+                new(2.5f * TRIANGLE_H + HALF_BASE, HALF_BASE + BASE_LENGTH),
                 rotationDeg: -90
             ),
             new TriangleBlock(
-                new(1.5f * TRIANGLE_H + BASE_LENGTH / 2, 2 * BASE_LENGTH),
+                new(2 * TRIANGLE_H / 3 + TRIANGLE_H + HALF_BASE, 2 * BASE_LENGTH),
                 rotationDeg: 90
             ),
 
             // Sayap kiri atas
             new HexagonBlock(
                 new(-(HALF_BASE + TRIANGLE_H), BASE_LENGTH),
-                rotationDeg: 90
+                rotationDeg: 30
             ),
             new TrapezoidBlock(
-                new(-(2.5f * TRIANGLE_H + BASE_LENGTH / 2), HALF_BASE + BASE_LENGTH),
+                new(-(2.5f * TRIANGLE_H + HALF_BASE), HALF_BASE + BASE_LENGTH),
                 rotationDeg: 90
             ),
             new TriangleBlock(
-                new(-(1.5f * TRIANGLE_H + BASE_LENGTH / 2), 2 * BASE_LENGTH),
+                new(-(2 * TRIANGLE_H / 3 + TRIANGLE_H + HALF_BASE), 2 * BASE_LENGTH),
                 rotationDeg: -90
-            ),      
+            ),
 
             // Sayap kanan bawah
             new TrapezoidBlock(
@@ -66,11 +66,11 @@ public class ButterflyChallenge : Challenge
                 rotationDeg: 150
             ),
             new TriangleBlock(
-                new(HALF_BASE + TRIANGLE_H / 2, -BASE_LENGTH),
+                new(HALF_BASE + TRIANGLE_H / 3, -BASE_LENGTH),
                 rotationDeg: -90
             ),
             new TriangleBlock(
-                new(HALF_BASE + TRIANGLE_H * 1.5f, -BASE_LENGTH),
+                new(HALF_BASE + TRIANGLE_H + 2 * TRIANGLE_H / 3, -BASE_LENGTH),
                 rotationDeg: 90
             ),
             new ParallelogramBlock(
@@ -83,11 +83,11 @@ public class ButterflyChallenge : Challenge
                 rotationDeg: -150
             ),
             new TriangleBlock(
-                new(-(HALF_BASE + TRIANGLE_H / 2), -BASE_LENGTH),
+                new(-(HALF_BASE + TRIANGLE_H / 3), -BASE_LENGTH),
                 rotationDeg: 90
             ),
             new TriangleBlock(
-                new(-(HALF_BASE + TRIANGLE_H * 1.5f), -BASE_LENGTH),
+                new(-(HALF_BASE + TRIANGLE_H + 2 * TRIANGLE_H / 3), -BASE_LENGTH),
                 rotationDeg: -90
             ),
             new ParallelogramBlock(
@@ -110,6 +110,6 @@ public class ButterflyChallenge : Challenge
 
         float centerX = halfBase - minRotatedX;
 
-        return new Vector2(centerX, -halfTriHeight + 3 * Mathf.Sqrt2);
+        return new Vector2(centerX, -halfTriHeight + 4.65f);
     }
 }
