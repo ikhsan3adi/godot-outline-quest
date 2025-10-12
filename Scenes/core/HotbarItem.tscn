@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://hmxmhruwosai"]
+
+[ext_resource type="Texture2D" uid="uid://c0se07xo1ak4u" path="res://Assets/gui/level_select/table.png" id="1_vswwt"]
+[ext_resource type="Script" uid="uid://dk7p1ekpcwhrp" path="res://Scripts/core/HotbarItem.cs" id="2_7l7a2"]
+[ext_resource type="Texture2D" uid="uid://cm4fpgxpn0bua" path="res://Assets/pattern_blocks/hexagon.png" id="2_ab6mx"]
+[ext_resource type="FontFile" uid="uid://iskq18vac3da" path="res://Assets/fonts/soupofjustice.ttf" id="3_7l7a2"]
+
+[node name="HotbarItemRoot" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 96.0
+offset_bottom = 96.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+script = ExtResource("2_7l7a2")
+
+[node name="HotbarItem" type="TextureButton" parent="."]
+layout_mode = 0
+offset_right = 96.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("1_vswwt")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Icon" type="TextureRect" parent="HotbarItem"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ab6mx")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemCount" type="Label" parent="HotbarItem"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -54.0
+offset_right = 2.0
+offset_bottom = -22.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(18.892, 18.892, 18.892, 1)
+theme_override_colors/font_shadow_color = Color(0.18431373, 0.1764706, 0.17254902, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("3_7l7a2")
+theme_override_font_sizes/font_size = 32
+text = "x64"
+horizontal_alignment = 2
+
+[connection signal="button_down" from="HotbarItem" to="." method="_button_down"]
+[connection signal="button_up" from="HotbarItem" to="." method="_reset_button"]
+[connection signal="focus_entered" from="HotbarItem" to="." method="_start_hover"]
+[connection signal="focus_exited" from="HotbarItem" to="." method="_reset_button"]
+[connection signal="mouse_entered" from="HotbarItem" to="." method="_start_hover"]
+[connection signal="mouse_exited" from="HotbarItem" to="." method="_reset_button"]

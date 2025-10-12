@@ -98,7 +98,7 @@ public class ButterflyChallenge : Challenge
         BuildOutlines();
     }
 
-    private Vector2 calculateCenterTrapezoid(float deg)
+    private static Vector2 calculateCenterTrapezoid(float deg)
     {
         float rotationRad = Mathf.DegToRad(deg);
         float halfBase = PatternBlock.BASE_LENGTH / 2;

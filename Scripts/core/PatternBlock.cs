@@ -39,7 +39,7 @@ public abstract partial class PatternBlock : Node2D
     /// </summary>
     public List<Vector2> Points { get; protected set; } = [];
 
-    protected bool filled = false;
+    public bool filled { get; protected set; } = false;
 
     private static readonly Primitif primitif = new Primitif();
 
@@ -131,6 +131,13 @@ public abstract partial class PatternBlock : Node2D
     private void DrawWhitePolygon()
     {
         DrawColoredPolygon(this.Vertices.ToArray(), Colors.WhiteSmoke);
+    }
+
+    public void SetFilled(bool isFilled)
+    {
+        this.filled = isFilled;
+
+        QueueRedraw();
     }
 
     public override void _ExitTree()

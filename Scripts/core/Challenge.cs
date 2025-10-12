@@ -21,7 +21,7 @@ abstract public class Challenge
 
     public GameStat stat = new GameStat();
 
-    private ulong _startTimeMsec = 0; // waktu mulai dalam milidetik
+    public ulong StartTimeMsec { get; private set; } // waktu mulai dalam milidetik
 
     public bool IsActive { get; private set; } = false;
 
@@ -63,7 +63,7 @@ abstract public class Challenge
     public void StartChallenge()
     {
         IsActive = true;
-        _startTimeMsec = Time.GetTicksMsec();
+        StartTimeMsec = Time.GetTicksMsec();
     }
 
     public void EndChallenge()
@@ -71,7 +71,7 @@ abstract public class Challenge
         if (!IsActive) return;
 
         IsActive = false;
-        ulong durationMsec = Time.GetTicksMsec() - _startTimeMsec;
+        ulong durationMsec = Time.GetTicksMsec() - StartTimeMsec;
         stat.ElapsedTimeSeconds = durationMsec / 1000.0;
     }
 }
