@@ -31,14 +31,15 @@ public partial class HotbarItem : InteractiveButton
 
         _icon.Texture = _iconTexture;
         UpdateCount(_count);
-        _button.Pressed += OnButtonPressed;
+
+        _button.ButtonDown += OnButtonDown;
     }
 
     public void UpdateCount(int count)
     {
         _countLabel.Text = $"x{count}";
 
-        _button.Disabled = (count <= 0);
+        _button.Disabled = count <= 0;
 
         if (_button.Disabled)
         {
@@ -50,7 +51,7 @@ public partial class HotbarItem : InteractiveButton
         }
     }
 
-    private void OnButtonPressed()
+    private void OnButtonDown()
     {
         EmitSignal(SignalName.BlockDragStarted, _blockType.AssemblyQualifiedName);
     }

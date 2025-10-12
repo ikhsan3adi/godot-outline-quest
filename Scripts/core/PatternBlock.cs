@@ -29,8 +29,25 @@ public abstract partial class PatternBlock : Node2D
         }
     }
 
+    private float _rotationDeg = 0;
+
+    public float RotationDeg
+    {
+        get => _rotationDeg;
+        set
+        {
+            _rotationDeg = value;
+            RecalculateTransform();
+        }
+    }
+
     /// <summary>
-    /// blueprint dari bentuk.
+    /// blueprint dari bentuk sebelum di-transformasi.
+    /// </summary>
+    public List<Vector2> OriginalVertices { get; protected set; } = [];
+
+    /// <summary>
+    /// blueprint dari bentuk yang di-transformasi.
     /// </summary>
     public List<Vector2> Vertices { get; protected set; } = [];
 
@@ -49,19 +66,10 @@ public abstract partial class PatternBlock : Node2D
         this.Scale = scale ?? this.Scale;
         this.Color = color ?? this.Color;
         this.filled = filled ?? this.filled;
+        this._rotationDeg = rotationDeg;
 
         BuildOriginalVertices();
-
-        System.Numerics.Matrix4x4 matrix = TransformasiFast.CreateScale(
-            this.Scale.X,
-            this.Scale.Y
-        );
-
-        TransformasiFast.RotationCounterClockwise(ref matrix, (float)(rotationDeg * Mathf.Pi / 180), new(0, 0));
-
-        TransformasiFast.ReflectionToX(ref matrix);
-
-        this.Vertices = TransformasiFast.GetTransformPoint(matrix, this.Vertices);
+        RecalculateTransform();
 
         if (!this.filled)
             BuildPoints();
@@ -73,6 +81,19 @@ public abstract partial class PatternBlock : Node2D
     }
 
     protected abstract void BuildOriginalVertices();
+
+    public void RecalculateTransform()
+    {
+        System.Numerics.Matrix4x4 matrix = TransformasiFast.CreateScale(this.Scale.X, this.Scale.Y);
+
+        float radians = Mathf.DegToRad(_rotationDeg);
+        TransformasiFast.RotationCounterClockwise(ref matrix, radians, new(0, 0));
+
+        TransformasiFast.ReflectionToX(ref matrix);
+
+        this.Vertices = TransformasiFast.GetTransformPoint(matrix, this.OriginalVertices);
+        QueueRedraw();
+    }
 
     protected virtual void BuildPoints()
     {
@@ -98,7 +119,7 @@ public abstract partial class PatternBlock : Node2D
     {
         if (matrix != System.Numerics.Matrix4x4.Identity)
         {
-            Vertices = TransformasiFast.GetTransformPoint(matrix, Vertices);
+            Vertices = TransformasiFast.GetTransformPoint(matrix, OriginalVertices);
         }
 
         if (!this.filled)

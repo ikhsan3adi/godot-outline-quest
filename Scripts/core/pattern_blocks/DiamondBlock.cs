@@ -17,7 +17,7 @@ partial class DiamondBlock : PatternBlock
         float halfLongDiagonal = BASE_LENGTH * Mathf.Cos(halfAngleRad);
         float halfShortDiagonal = BASE_LENGTH * Mathf.Sin(halfAngleRad);
 
-        Vertices = [
+        OriginalVertices = [
             new(0, halfShortDiagonal),
             new(halfLongDiagonal, 0),
             new(0, -halfShortDiagonal),

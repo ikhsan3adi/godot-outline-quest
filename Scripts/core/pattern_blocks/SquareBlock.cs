@@ -11,7 +11,7 @@ partial class SquareBlock : PatternBlock
 
     protected override void BuildOriginalVertices()
     {
-        Vertices = [
+        OriginalVertices = [
             new(-BASE_LENGTH / 2, -BASE_LENGTH / 2),
             new(BASE_LENGTH / 2, -BASE_LENGTH / 2),
             new(BASE_LENGTH / 2, BASE_LENGTH / 2),

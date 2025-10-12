@@ -11,7 +11,7 @@ partial class ParallelogramBlock : PatternBlock
 
     protected override void BuildOriginalVertices()
     {
-        Vertices = [
+        OriginalVertices = [
             new(-TRIANGLE_HEIGHT, 0),
             new(0, BASE_LENGTH / 2),
             new(TRIANGLE_HEIGHT, 0),

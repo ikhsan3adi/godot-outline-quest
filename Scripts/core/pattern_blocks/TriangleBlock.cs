@@ -11,7 +11,7 @@ partial class TriangleBlock : PatternBlock
 
     protected override void BuildOriginalVertices()
     {
-        Vertices = [
+        OriginalVertices = [
             new(0, TRIANGLE_HEIGHT / 2),
             new(-BASE_LENGTH / 2, -TRIANGLE_HEIGHT / 2),
             new(BASE_LENGTH / 2, -TRIANGLE_HEIGHT / 2),

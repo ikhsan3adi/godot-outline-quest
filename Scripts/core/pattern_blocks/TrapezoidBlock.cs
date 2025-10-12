@@ -11,7 +11,7 @@ partial class TrapezoidBlock : PatternBlock
 
     protected override void BuildOriginalVertices()
     {
-        Vertices = [
+        OriginalVertices = [
             new(-BASE_LENGTH / 2, TRIANGLE_HEIGHT / 2),
             new(BASE_LENGTH / 2, TRIANGLE_HEIGHT / 2),
             new(BASE_LENGTH, -TRIANGLE_HEIGHT / 2),

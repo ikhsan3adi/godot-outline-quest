@@ -6,8 +6,9 @@ using System.Reflection;
 
 public partial class GameManager : Node2D
 {
-    private const float SNAP_DISTANCE_THRESHOLD = 40.0f;
-    private const float SNAP_ANGLE_THRESHOLD = 15.0f;  // deg
+    private const float SNAP_DISTANCE_THRESHOLD = 20.0f;
+    private const float SNAP_ANGLE_THRESHOLD = 7.0f; // toleransi snap sudut dalam derajat
+    private const float ROTATION_INCREMENT_DEG = 5.0f; // derajat per scroll
 
     /// <summary>
     /// Node tak terlihat yang menjadi wadah dan pivot untuk semua block + outline.
@@ -197,7 +198,24 @@ public partial class GameManager : Node2D
 
     public override void _Input(InputEvent @event)
     {
-        if (@event is InputEventMouseButton mouseEvent && !mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
+        // rotasi dengan scroll wheel
+        if (draggedBlock != null && @event is InputEventMouseButton mouseEvent)
+        {
+            if (mouseEvent.ButtonIndex == MouseButton.WheelUp)
+            {
+                // CCW
+                draggedBlock.RotationDeg += ROTATION_INCREMENT_DEG;
+
+            }
+            else if (mouseEvent.ButtonIndex == MouseButton.WheelDown)
+            {
+                // CW
+                draggedBlock.RotationDeg -= ROTATION_INCREMENT_DEG;
+            }
+        }
+
+        // lepaskan/drop block yang sedang diseret
+        if (@event is InputEventMouseButton mouseButtonEvent && !mouseButtonEvent.Pressed && mouseButtonEvent.ButtonIndex == MouseButton.Left)
         {
             if (draggedBlock != null)
             {
@@ -215,8 +233,8 @@ public partial class GameManager : Node2D
             {
                 float distance = draggedBlock.CartesianPosition.DistanceTo(templateBlock.CartesianPosition);
 
-                float angleA = draggedBlock.RotationDegrees;
-                float angleB = templateBlock.RotationDegrees;
+                float angleA = draggedBlock.RotationDeg;
+                float angleB = templateBlock.RotationDeg;
                 float angleDiff = Mathf.Abs(Mathf.RadToDeg(Mathf.AngleDifference(Mathf.DegToRad(angleA), Mathf.DegToRad(angleB))));
 
                 // snap berhasil

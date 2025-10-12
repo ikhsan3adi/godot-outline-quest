@@ -11,7 +11,7 @@ partial class HexagonBlock : PatternBlock
 
     protected override void BuildOriginalVertices()
     {
-        Vertices = [
+        OriginalVertices = [
             new(-BASE_LENGTH, 0),
             new(-BASE_LENGTH / 2, TRIANGLE_HEIGHT),
             new(BASE_LENGTH / 2, TRIANGLE_HEIGHT),
