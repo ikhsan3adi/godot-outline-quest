@@ -5,11 +5,12 @@ public partial class Welcome : Control
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        ScreenUtils.Initialize(GetViewport());
     }
 
     private void _on_play_btn_pressed()
     {
-        GetTree().ChangeSceneToFile("res://Scenes/Karya1.tscn");
+        GetTree().ChangeSceneToFile("res://Scenes/Game.tscn");
     }
 
     private void _on_about_btn_pressed()

@@ -39,7 +39,7 @@ public partial class TransformasiFast : RefCounted
         return matrix;
     }
 
-    public List<Vector2> GetTransformPoint(Matrix4x4 m, List<Vector2> res)
+    public static List<Vector2> GetTransformPoint(Matrix4x4 m, List<Vector2> res)
     {
         List<Vector2> transformedPoints = new List<Vector2>();
         foreach (Vector2 point in res)
@@ -66,14 +66,14 @@ public partial class TransformasiFast : RefCounted
         return transformedPoints;
     }
 
-    public void Translation(ref Matrix4x4 matrix, float x, float y)
+    public static void Translation(ref Matrix4x4 matrix, float x, float y)
     {
         matrix = CreateTranslation(x, y) * matrix; // Pre-multiplication
     }
 
-    public void Scaling(ref Matrix4x4 matrix, float x, float y, Vector2 coord)
+    public static void Scaling(ref Matrix4x4 matrix, float x, float y, Vector2 coord)
     {
-        if (coord.X != 0 && coord.Y != 0)
+        if (coord.X != 0 || coord.Y != 0)
         {
             Translation(ref matrix, -coord.X, -coord.Y);
             matrix = CreateScale(x, y) * matrix; // Pre-multiplication
@@ -85,9 +85,9 @@ public partial class TransformasiFast : RefCounted
         }
     }
 
-    public void RotationClockwise(ref Matrix4x4 matrix, float radians, Vector2 coord) // Use radians directly
+    public static void RotationClockwise(ref Matrix4x4 matrix, float radians, Vector2 coord) // Use radians directly
     {
-        if (coord.X != 0 && coord.Y != 0)
+        if (coord.X != 0 || coord.Y != 0)
         {
             Translation(ref matrix, -coord.X, -coord.Y);
             matrix = CreateRotationZ(radians) * matrix; // Pre-multiplication
@@ -99,9 +99,9 @@ public partial class TransformasiFast : RefCounted
         }
     }
 
-    public void RotationCounterClockwise(ref Matrix4x4 matrix, float radians, Vector2 coord) // Use radians directly
+    public static void RotationCounterClockwise(ref Matrix4x4 matrix, float radians, Vector2 coord) // Use radians directly
     {
-        if (coord.X != 0 && coord.Y != 0)
+        if (coord.X != 0 || coord.Y != 0)
         {
             Translation(ref matrix, -coord.X, -coord.Y);
             matrix = CreateRotationZ(-radians) * matrix; // Pre-multiplication
@@ -113,13 +113,13 @@ public partial class TransformasiFast : RefCounted
         }
     }
 
-    public void Shearing(ref Matrix4x4 matrix, float x, float y, Vector2 coord)
+    public static void Shearing(ref Matrix4x4 matrix, float x, float y, Vector2 coord)
     {
         Matrix4x4 shearingMatrix = Matrix4x4.Identity;
         shearingMatrix.M12 = x;
         shearingMatrix.M21 = y;
 
-        if (coord.X != 0 && coord.Y != 0)
+        if (coord.X != 0 || coord.Y != 0)
         {
             Translation(ref matrix, -coord.X, -coord.Y);
             matrix = shearingMatrix * matrix; // Pre-multiplication
@@ -131,7 +131,7 @@ public partial class TransformasiFast : RefCounted
         }
     }
 
-    public void ReflectionToX(ref Matrix4x4 matrix) // Remove ref Vector2 coord
+    public static void ReflectionToX(ref Matrix4x4 matrix) // Remove ref Vector2 coord
     {
         Matrix4x4 reflectionMatrix = Matrix4x4.Identity;
         reflectionMatrix.M22 = -1; // Reflection along x-axis
@@ -139,7 +139,7 @@ public partial class TransformasiFast : RefCounted
         // Remove: coord.Y = -coord.Y;
     }
 
-    public void ReflectionToY(ref Matrix4x4 matrix)  // Remove ref Vector2 coord
+    public static void ReflectionToY(ref Matrix4x4 matrix)  // Remove ref Vector2 coord
     {
         Matrix4x4 reflectionMatrix = Matrix4x4.Identity;
         reflectionMatrix.M11 = -1; // Reflection along y-axis
@@ -147,7 +147,7 @@ public partial class TransformasiFast : RefCounted
         // Remove: coord.X = -coord.X; 
     }
 
-    public void ReflectionToOrigin(ref Matrix4x4 matrix) // Remove ref Vector2 coord
+    public static void ReflectionToOrigin(ref Matrix4x4 matrix) // Remove ref Vector2 coord
     {
         Matrix4x4 reflectionMatrix = Matrix4x4.Identity;
         reflectionMatrix.M11 = -1; // Reflection through origin

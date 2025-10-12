@@ -109,4 +109,16 @@ public static class GraphicsUtils
             }
         }
     }
+
+    public static void DrawBrush(Node2D targetNode, float centerX, float centerY, int thickness, Color color)
+    {
+        int half = thickness / 2;
+        for (int x = -half; x <= half; x++)
+        {
+            for (int y = -half; y <= half; y++)
+            {
+                PutPixel(targetNode, centerX + x, centerY + y, color);
+            }
+        }
+    }
 }

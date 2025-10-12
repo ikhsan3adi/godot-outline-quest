@@ -94,6 +94,7 @@ offset_bottom = 80.0
 grow_horizontal = 2
 pivot_offset = Vector2(250, 40)
 theme_override_font_sizes/font_size = 64
+disabled = false
 
 [node name="VBoxContainerRight" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -119,4 +120,5 @@ grow_vertical = 0
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainerLeft/Control/HowToPlayBtn" to="." method="_on_guide_btn_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainerLeft/Control/AboutBtn" to="." method="_on_about_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainerCenter/MarginContainer/Control/PlayButton" to="." method="_on_play_btn_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainerRight/Control/ExitBtn" to="." method="_on_exit_btn_pressed"]

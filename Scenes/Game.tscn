@@ -1,3 +1,45 @@
-[gd_scene load_steps=0 format=3 uid="uid://cyrjndv2upu34"]
+[gd_scene load_steps=3 format=3 uid="uid://cyrjndv2upu34"]
 
-[node name="Game" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://dm1u1tu8uyrky" path="res://Assets/gui/menu/bg.png" id="1_gl6un"]
+[ext_resource type="Script" uid="uid://c6xygk0ukcxsy" path="res://Scripts/core/GameManager.cs" id="1_iukft"]
+
+[node name="GameRoot" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -793.333
+offset_bottom = 193.33374
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_gl6un")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.88269997, 0.96272504, 0.97, 0.9411765)
+
+[node name="Game" type="Node2D" parent="."]
+script = ExtResource("1_iukft")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
