@@ -10,3 +10,11 @@ Proyek komputer grafik yang dibuat menggunakan [Godot Engine](https://godotengin
 - NIM: 241511080
 - Kelas: 2C
 - Prodi: D3 Teknik Informatika
+
+## Preview
+
+| Level 1                                         | Level 2                                                         | Level 3                                               |
+| ----------------------------------------------- | --------------------------------------------------------------- | ----------------------------------------------------- |
+| ![level-1](./.image/README/level-1.png)         | ![level-2](./.image/README/level-2.png)                         | Coming Soon                                           |
+| **How To Play**                                 | **Challenge Completed**                                         | **Game Completed**                                    |
+| ![how-to-play](./.image/README/how-to-play.png) | ![challenge-completed](./.image/README/challenge-completed.png) | ![game-completed](./.image/README/game-completed.png) |
