@@ -16,10 +16,10 @@ public partial class GameManager : Node2D
     private Node2D challengeContainer;
     private TemplateOutlineNode templateOutline;
 
-    private static readonly List<Challenge> challenges = [
+    private readonly List<Challenge> challenges = [
         new AntChallenge(),
         new ButterflyChallenge(),
-        new SpiderChallenge(),
+        // new SpiderChallenge(),
     ];
 
     private int currentChallengeIndex = -1;
@@ -53,7 +53,26 @@ public partial class GameManager : Node2D
     [Export]
     private Label scoreLabel;
 
-    private Dictionary<Type, Texture2D> iconCache = [];
+    [ExportGroup("Overlay UI")]
+    [Export]
+    private CanvasLayer gameOverlay;
+    [Export]
+    private PanelContainer pausePanel;
+    [Export]
+    private PanelContainer levelCompletePanel;
+    [Export]
+    private PanelContainer gameCompletePanel;
+
+    [Export]
+    private Label levelCompleteScoreLabel;
+    [Export]
+    private Label levelCompleteTimeLabel;
+    [Export]
+    private Label gameCompleteScoreLabel;
+    [Export]
+    private Label gameCompleteTimeLabel;
+
+    private readonly Dictionary<Type, Texture2D> iconCache = [];
 
     public override void _Ready()
     {
@@ -65,6 +84,7 @@ public partial class GameManager : Node2D
                 challengeContainer.Position = ScreenUtils.ConvertToPixel(0, 0);
         };
 
+        gameOverlay.Hide();
         GoToChallenge(0);
     }
 
@@ -285,20 +305,64 @@ public partial class GameManager : Node2D
 
         currentChallenge.EndChallenge();
 
-        // TODO Tampilkan statistik challenge yang baru selesai
-
-        // akumulasi stat
         _totalStats.ElapsedTimeSeconds += currentChallenge.stat.ElapsedTimeSeconds;
         _totalStats.Score += currentChallenge.stat.Score;
 
-        GoToChallenge(currentChallengeIndex + 1);
+        if (currentChallengeIndex + 1 >= challenges.Count)
+        {
+            ShowFinalStats();
+        }
+        else
+        {
+            TimeSpan time = TimeSpan.FromSeconds(currentChallenge.stat.ElapsedTimeSeconds);
+            string timerText = time.ToString(@"mm\:ss");
+
+            levelCompleteScoreLabel.Text = $"{currentChallenge.stat.Score}";
+            levelCompleteTimeLabel.Text = timerText;
+
+            levelCompletePanel.Show();
+            gameOverlay.Show();
+        }
     }
 
     private void ShowFinalStats()
     {
-        // menampilkan UI layar kemenangan
+        TimeSpan totalTime = TimeSpan.FromSeconds(_totalStats.ElapsedTimeSeconds);
+        string totalTimeText = totalTime.ToString(@"mm\:ss");
+
+        gameCompleteScoreLabel.Text = $"{_totalStats.Score}";
+        gameCompleteTimeLabel.Text = totalTimeText;
+
+        gameCompletePanel.Show();
+        gameOverlay.Show();
     }
 
+    private void OnPauseButtonPressed()
+    {
+        GetTree().Paused = true;
+        pausePanel.Show();
+        gameOverlay.Show();
+    }
+
+    private void OnResumeButtonPressed()
+    {
+        GetTree().Paused = false;
+        pausePanel.Hide();
+        gameOverlay.Hide();
+    }
+
+    private void OnBackToMenuButtonPressed()
+    {
+        GetTree().Paused = false;
+        GetTree().ChangeSceneToFile("res://Scenes/Welcome.tscn");
+    }
+
+    private void OnNextLevelButtonPressed()
+    {
+        levelCompletePanel.Hide();
+        gameOverlay.Hide();
+        GoToChallenge(currentChallengeIndex + 1);
+    }
 
     public override void _ExitTree()
     {

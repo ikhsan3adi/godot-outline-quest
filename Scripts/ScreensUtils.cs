@@ -25,8 +25,13 @@ public static class ScreenUtils
 
     public static event Action UniversalScaleFactorChanged;
 
+    private static bool isInitialized = false;
+
     public static void Initialize(Viewport viewport)
     {
+        if (isInitialized)
+            return;
+
         Vector2 windowSize = viewport.GetVisibleRect().Size;
         ScreenWidth = (int)windowSize.X;
         ScreenHeight = (int)windowSize.Y;
@@ -39,6 +44,7 @@ public static class ScreenUtils
         Viewport = viewport;
 
         Viewport.SizeChanged += OnResize;
+        isInitialized = true;
     }
 
     public static Vector2 ConvertToCartesian(float x, float y, float marginLeft = 0, float marginTop = 0)

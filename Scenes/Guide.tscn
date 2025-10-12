@@ -58,17 +58,27 @@ offset_bottom = 0.0
 grow_vertical = 0
 texture_normal = ExtResource("4_tacp2")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -492.0
+offset_top = -349.0
+offset_right = 492.0
+offset_bottom = 349.0
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
 
-[node name="Title" parent="MarginContainer/VBoxContainer" instance=ExtResource("5_5ya8d")]
+[node name="Title" parent="MarginContainer/Control/VBoxContainer" instance=ExtResource("5_5ya8d")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 96
 text = "How To Play"
 
-[node name="About" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="About" type="Label" parent="MarginContainer/Control/VBoxContainer"]
 custom_minimum_size = Vector2(860, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0.14509805, 0.14509805, 0.14509805, 1)
@@ -77,13 +87,11 @@ theme_override_constants/shadow_offset_y = 3
 theme_override_fonts/font = ExtResource("6_xpmmp")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxTexture_vkiom")
-text = "1. Drag & Drop: Pilih salah satu blok dari panel di bawah layar.
+text = "1. Seret & Putar (Drag & Rotate): Klik-tahan blok dari panel kanan. Saat menyeret, gunakan scroll wheel untuk memutar.
 
-2. Fit the Outline: Seret blok dan letakkan di atas outline yang tersedia.
+2. Lepas untuk Menempel (Drop): Arahkan blok ke atas outline yang bentuknya cocok. Lepaskan tombol mouse untuk meletakkannya. Jika pas, blok akan otomatis menempel (snap).
 
-3. Complete the Pattern: Lanjutkan hingga semua outline terisi dengan blok yang tepat.
-
-4. Finish: Setelah semua outline terisi, kamu akan berhasil menyelesaikan level."
+3. Selesaikan Level: Lanjutkan proses ini hingga semua bagian outline terisi dengan blok yang tepat. Setelah semua terisi, Anda akan berhasil menyelesaikan level."
 horizontal_alignment = 3
 autowrap_mode = 2
 

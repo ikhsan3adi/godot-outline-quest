@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cyrjndv2upu34"]
+[gd_scene load_steps=17 format=3 uid="uid://cyrjndv2upu34"]
 
 [ext_resource type="Texture2D" uid="uid://dm1u1tu8uyrky" path="res://Assets/gui/menu/bg.png" id="1_gl6un"]
 [ext_resource type="Script" uid="uid://c6xygk0ukcxsy" path="res://Scripts/core/GameManager.cs" id="1_iukft"]
@@ -10,6 +10,12 @@
 [ext_resource type="FontFile" uid="uid://iskq18vac3da" path="res://Assets/fonts/soupofjustice.ttf" id="8_71axn"]
 [ext_resource type="Texture2D" uid="uid://dfahg1571t5jj" path="res://Assets/gui/bubble/clock.png" id="9_dahhg"]
 [ext_resource type="Texture2D" uid="uid://ddyee7b8fk8bp" path="res://Assets/gui/upgrade/star.png" id="10_71axn"]
+[ext_resource type="PackedScene" uid="uid://gwv7s0yte7b4" path="res://Scenes/gui/MenuTitle.tscn" id="11_3so38"]
+[ext_resource type="Texture2D" uid="uid://dqkgsulcb4rk8" path="res://Assets/gui/btn/play.png" id="12_3cx6b"]
+[ext_resource type="Texture2D" uid="uid://cctu3fucnqab8" path="res://Assets/gui/shop/bg.png" id="13_acvyw"]
+[ext_resource type="PackedScene" uid="uid://ct7pa6iarcpky" path="res://Scenes/gui/InteractiveTextButton.tscn" id="14_alh3a"]
+[ext_resource type="Texture2D" uid="uid://dnljyqevh0tnd" path="res://Assets/gui/btn/menu.png" id="15_4q8tf"]
+[ext_resource type="Texture2D" uid="uid://dyjhkyfo0r6iq" path="res://Assets/gui/shop/table.png" id="15_alh3a"]
 
 [node name="GameRoot" type="Control"]
 layout_mode = 3
@@ -43,13 +49,21 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.88269997, 0.96272504, 0.97, 0.627451)
 
-[node name="Game" type="Node2D" parent="." node_paths=PackedStringArray("hotbarGrid", "levelLabel", "timerLabel", "scoreLabel")]
+[node name="Game" type="Node2D" parent="." node_paths=PackedStringArray("hotbarGrid", "levelLabel", "timerLabel", "scoreLabel", "gameOverlay", "pausePanel", "levelCompletePanel", "gameCompletePanel", "levelCompleteScoreLabel", "levelCompleteTimeLabel", "gameCompleteScoreLabel", "gameCompleteTimeLabel")]
 script = ExtResource("1_iukft")
 hotbarGrid = NodePath("../Control/RightHUD/HotbarGridContainer")
 hotbarItemScene = ExtResource("3_j5yw3")
 levelLabel = NodePath("../Control/LeftHUD/LevelText")
 timerLabel = NodePath("../Control/LeftHUD/VBoxContainer/TimerBg/TimerText")
 scoreLabel = NodePath("../Control/LeftHUD/VBoxContainer/ScoreBg/ScoreText")
+gameOverlay = NodePath("../GameOverlay")
+pausePanel = NodePath("../GameOverlay/PausePanel")
+levelCompletePanel = NodePath("../GameOverlay/LevelCompletePanel")
+gameCompletePanel = NodePath("../GameOverlay/GameCompletePanel")
+levelCompleteScoreLabel = NodePath("../GameOverlay/LevelCompletePanel/MarginContainer/Control/VBoxContainer/Control/StatsBg/StatsBg2/Score")
+levelCompleteTimeLabel = NodePath("../GameOverlay/LevelCompletePanel/MarginContainer/Control/VBoxContainer/Control/StatsBg/StatsBg2/Time")
+gameCompleteScoreLabel = NodePath("../GameOverlay/GameCompletePanel/MarginContainer/Control/VBoxContainer/Control/StatsBg/StatsBg2/Score")
+gameCompleteTimeLabel = NodePath("../GameOverlay/GameCompletePanel/MarginContainer/Control/VBoxContainer/Control/StatsBg/StatsBg2/Time")
 
 [node name="Control" type="Control" parent="."]
 z_index = -1
@@ -249,3 +263,480 @@ theme_override_font_sizes/font_size = 48
 text = "Level
 3"
 horizontal_alignment = 1
+
+[node name="GameOverlay" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="PausePanel" type="PanelContainer" parent="GameOverlay"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="GameOverlay/PausePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Control" type="Control" parent="GameOverlay/PausePanel/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverlay/PausePanel/MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -308.0
+offset_top = -112.0
+offset_right = 308.0
+offset_bottom = 112.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Title" parent="GameOverlay/PausePanel/MarginContainer/Control/VBoxContainer" instance=ExtResource("11_3so38")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 96
+text = "Paused"
+
+[node name="Control" type="Control" parent="GameOverlay/PausePanel/MarginContainer/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="InteractiveButton" parent="GameOverlay/PausePanel/MarginContainer/Control/VBoxContainer/Control" instance=ExtResource("5_7lihs")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 60.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("12_3cx6b")
+
+[node name="MenuButton" parent="GameOverlay/PausePanel/MarginContainer/Control" instance=ExtResource("5_7lihs")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -120.0
+offset_bottom = 0.0
+grow_vertical = 0
+size_flags_horizontal = 3
+texture_normal = ExtResource("15_4q8tf")
+
+[node name="LevelCompletePanel" type="PanelContainer" parent="GameOverlay"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GameOverlay/LevelCompletePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Control" type="Control" parent="GameOverlay/LevelCompletePanel/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverlay/LevelCompletePanel/MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -308.0
+offset_top = -320.0
+offset_right = 308.0
+offset_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Title" parent="GameOverlay/LevelCompletePanel/MarginContainer/Control/VBoxContainer" instance=ExtResource("11_3so38")]
+z_index = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 96
+text = "Challenge
+Completed"
+
+[node name="Control" type="Control" parent="GameOverlay/LevelCompletePanel/MarginContainer/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StatsBg" type="TextureRect" parent="GameOverlay/LevelCompletePanel/MarginContainer/Control/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -299.0
+offset_top = -276.5
+offset_right = 299.0
+offset_bottom = 164.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_acvyw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatsBg2" type="TextureRect" parent="GameOverlay/LevelCompletePanel/MarginContainer/Control/VBoxContainer/Control/StatsBg"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 44.74829
+offset_top = 14.0
+offset_right = -44.74829
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_alh3a")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="YourScore" type="Label" parent="GameOverlay/LevelCompletePanel/MarginContainer/Control/VBoxContainer/Control/StatsBg/StatsBg2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -95.0
+offset_top = 54.0
+offset_right = 95.0
+offset_bottom = 90.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.06666667, 0.22745098, 0.13725491, 1)
+theme_override_fonts/font = ExtResource("8_71axn")
+theme_override_font_sizes/font_size = 32
+text = "Your Score"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="GameOverlay/LevelCompletePanel/MarginContainer/Control/VBoxContainer/Control/StatsBg/StatsBg2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -118.0
+offset_top = 92.0
+offset_right = 118.0
+offset_bottom = 188.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.011764706, 0.49019608, 0.6117647, 1)
+theme_override_fonts/font = ExtResource("8_71axn")
+theme_override_font_sizes/font_size = 96
+text = "12345"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YourTime" type="Label" parent="GameOverlay/LevelCompletePanel/MarginContainer/Control/VBoxContainer/Control/StatsBg/StatsBg2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -95.0
+offset_top = 221.0
+offset_right = 95.0
+offset_bottom = 257.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.06666667, 0.22745098, 0.13725491, 1)
+theme_override_fonts/font = ExtResource("8_71axn")
+theme_override_font_sizes/font_size = 24
+text = "Your Time"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Time" type="Label" parent="GameOverlay/LevelCompletePanel/MarginContainer/Control/VBoxContainer/Control/StatsBg/StatsBg2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -140.0
+offset_top = 250.0
+offset_right = 140.0
+offset_bottom = 306.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.011764706, 0.49019608, 0.6117647, 1)
+theme_override_fonts/font = ExtResource("8_71axn")
+theme_override_font_sizes/font_size = 56
+text = "23:59"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeIcon" type="TextureRect" parent="GameOverlay/LevelCompletePanel/MarginContainer/Control/VBoxContainer/Control/StatsBg/StatsBg2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -131.0
+offset_top = 239.0
+offset_right = -75.0
+offset_bottom = 306.0
+grow_horizontal = 2
+texture = ExtResource("9_dahhg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NextButton" parent="GameOverlay/LevelCompletePanel/MarginContainer/Control/VBoxContainer/Control" instance=ExtResource("14_alh3a")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -224.5
+offset_top = -121.0
+offset_right = 224.5
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 48
+disabled = false
+text = "Next Challenge"
+
+[node name="MenuButton" parent="GameOverlay/LevelCompletePanel/MarginContainer/Control" instance=ExtResource("5_7lihs")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -120.0
+offset_bottom = 0.0
+grow_vertical = 0
+size_flags_horizontal = 3
+texture_normal = ExtResource("15_4q8tf")
+
+[node name="GameCompletePanel" type="PanelContainer" parent="GameOverlay"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GameOverlay/GameCompletePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Control" type="Control" parent="GameOverlay/GameCompletePanel/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverlay/GameCompletePanel/MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -308.0
+offset_top = -320.0
+offset_right = 308.0
+offset_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Title" parent="GameOverlay/GameCompletePanel/MarginContainer/Control/VBoxContainer" instance=ExtResource("11_3so38")]
+z_index = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 96
+text = "Congratulations"
+
+[node name="Subtitle" parent="GameOverlay/GameCompletePanel/MarginContainer/Control/VBoxContainer" instance=ExtResource("11_3so38")]
+z_index = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.011764706, 0.49019608, 0.6117647, 1)
+theme_override_font_sizes/font_size = 48
+text = "All Challenges Completed!"
+
+[node name="Control" type="Control" parent="GameOverlay/GameCompletePanel/MarginContainer/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StatsBg" type="TextureRect" parent="GameOverlay/GameCompletePanel/MarginContainer/Control/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -299.0
+offset_top = -276.5
+offset_right = 299.0
+offset_bottom = 164.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_acvyw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatsBg2" type="TextureRect" parent="GameOverlay/GameCompletePanel/MarginContainer/Control/VBoxContainer/Control/StatsBg"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 44.74829
+offset_top = 14.0
+offset_right = -44.74829
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_alh3a")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="YourScore" type="Label" parent="GameOverlay/GameCompletePanel/MarginContainer/Control/VBoxContainer/Control/StatsBg/StatsBg2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -95.0
+offset_top = 54.0
+offset_right = 95.0
+offset_bottom = 90.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.06666667, 0.22745098, 0.13725491, 1)
+theme_override_fonts/font = ExtResource("8_71axn")
+theme_override_font_sizes/font_size = 32
+text = "Your Total Score"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="GameOverlay/GameCompletePanel/MarginContainer/Control/VBoxContainer/Control/StatsBg/StatsBg2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -118.0
+offset_top = 92.0
+offset_right = 118.0
+offset_bottom = 188.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.011764706, 0.49019608, 0.6117647, 1)
+theme_override_fonts/font = ExtResource("8_71axn")
+theme_override_font_sizes/font_size = 96
+text = "12345"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YourTime" type="Label" parent="GameOverlay/GameCompletePanel/MarginContainer/Control/VBoxContainer/Control/StatsBg/StatsBg2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -95.0
+offset_top = 221.0
+offset_right = 95.0
+offset_bottom = 257.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.06666667, 0.22745098, 0.13725491, 1)
+theme_override_fonts/font = ExtResource("8_71axn")
+theme_override_font_sizes/font_size = 24
+text = "Total Time"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Time" type="Label" parent="GameOverlay/GameCompletePanel/MarginContainer/Control/VBoxContainer/Control/StatsBg/StatsBg2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -140.0
+offset_top = 250.0
+offset_right = 140.0
+offset_bottom = 306.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.011764706, 0.49019608, 0.6117647, 1)
+theme_override_fonts/font = ExtResource("8_71axn")
+theme_override_font_sizes/font_size = 56
+text = "23:59"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeIcon" type="TextureRect" parent="GameOverlay/GameCompletePanel/MarginContainer/Control/VBoxContainer/Control/StatsBg/StatsBg2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -131.0
+offset_top = 239.0
+offset_right = -75.0
+offset_bottom = 306.0
+grow_horizontal = 2
+texture = ExtResource("9_dahhg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StarIcon" type="TextureRect" parent="GameOverlay/GameCompletePanel/MarginContainer/Control/VBoxContainer/Control/StatsBg/StatsBg2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 118.0
+offset_top = 82.0
+offset_right = 205.0
+offset_bottom = 173.0
+grow_horizontal = 2
+texture = ExtResource("10_71axn")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StarIcon2" type="TextureRect" parent="GameOverlay/GameCompletePanel/MarginContainer/Control/VBoxContainer/Control/StatsBg/StatsBg2"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -211.0
+offset_top = 82.0
+offset_right = -124.0
+offset_bottom = 173.0
+grow_horizontal = 2
+texture = ExtResource("10_71axn")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MenuButton" parent="GameOverlay/GameCompletePanel/MarginContainer/Control/VBoxContainer/Control" instance=ExtResource("14_alh3a")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -224.5
+offset_top = -121.0
+offset_right = 224.5
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 48
+disabled = false
+text = "Back To Menu"
+
+[connection signal="pressed" from="Control/LeftHUD/InteractiveButton" to="Game" method="OnPauseButtonPressed"]
+[connection signal="pressed" from="GameOverlay/PausePanel/MarginContainer/Control/VBoxContainer/Control/InteractiveButton" to="Game" method="OnResumeButtonPressed"]
+[connection signal="pressed" from="GameOverlay/PausePanel/MarginContainer/Control/MenuButton" to="Game" method="OnBackToMenuButtonPressed"]
+[connection signal="pressed" from="GameOverlay/LevelCompletePanel/MarginContainer/Control/VBoxContainer/Control/NextButton" to="Game" method="OnNextLevelButtonPressed"]
+[connection signal="pressed" from="GameOverlay/LevelCompletePanel/MarginContainer/Control/MenuButton" to="Game" method="OnBackToMenuButtonPressed"]
+[connection signal="pressed" from="GameOverlay/GameCompletePanel/MarginContainer/Control/VBoxContainer/Control/MenuButton" to="Game" method="OnBackToMenuButtonPressed"]
