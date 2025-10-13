@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://vepg08tntxpy"]
+
+[ext_resource type="Texture2D" uid="uid://dm1u1tu8uyrky" path="res://Assets/gui/menu/bg.png" id="1_b8y42"]
+
+[node name="Background" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -122.0
+offset_top = -965.0
+offset_right = 122.0
+offset_bottom = 196.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_b8y42")
+expand_mode = 1
+stretch_mode = 6

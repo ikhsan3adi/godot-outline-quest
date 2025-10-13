@@ -11,7 +11,7 @@ public abstract partial class PatternBlock : Node2D
     /// </summary>
     public const float BASE_LENGTH = 80;
 
-    public static readonly float TRIANGLE_HEIGHT = (BASE_LENGTH * Mathf.Sqrt(3)) / 2;
+    public static readonly float TRIANGLE_HEIGHT = BASE_LENGTH * Mathf.Sqrt(3) / 2;
 
     private Vector2 _cartesianPosition;
 

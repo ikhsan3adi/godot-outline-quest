@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dxn4pvqq76s1n"]
 
 [ext_resource type="Script" uid="uid://dtntl6odd268a" path="res://Scripts/About.cs" id="1_6oxj2"]
-[ext_resource type="Texture2D" uid="uid://dm1u1tu8uyrky" path="res://Assets/gui/menu/bg.png" id="2_7ngfu"]
+[ext_resource type="PackedScene" uid="uid://vepg08tntxpy" path="res://Scenes/gui/Background.tscn" id="2_wegk8"]
 [ext_resource type="FontFile" uid="uid://iskq18vac3da" path="res://Assets/fonts/soupofjustice.ttf" id="3_ceh3k"]
 [ext_resource type="PackedScene" uid="uid://drxh6sc78omsq" path="res://Scenes/gui/InteractiveIconButton.tscn" id="3_wegk8"]
 [ext_resource type="Texture2D" uid="uid://d0adqljegxd4e" path="res://Assets/gui/shop/4.png" id="4_egbfi"]
@@ -24,20 +24,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6oxj2")
 
-[node name="Background" type="TextureRect" parent="."]
-z_index = -1
+[node name="Background" parent="." instance=ExtResource("2_wegk8")]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -1422.0
-offset_bottom = 296.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("2_7ngfu")
-expand_mode = 1
-stretch_mode = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0

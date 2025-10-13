@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://cyrjndv2upu34"]
 
-[ext_resource type="Texture2D" uid="uid://dm1u1tu8uyrky" path="res://Assets/gui/menu/bg.png" id="1_gl6un"]
+[ext_resource type="PackedScene" uid="uid://vepg08tntxpy" path="res://Scenes/gui/Background.tscn" id="1_alh3a"]
 [ext_resource type="Script" uid="uid://c6xygk0ukcxsy" path="res://Scripts/core/GameManager.cs" id="1_iukft"]
 [ext_resource type="PackedScene" uid="uid://hmxmhruwosai" path="res://Scenes/core/HotbarItem.tscn" id="3_j5yw3"]
 [ext_resource type="Texture2D" uid="uid://4kbrwtbrt7io" path="res://Assets/gui/rating/bg.png" id="4_kldst"]
@@ -25,20 +25,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" parent="." instance=ExtResource("1_alh3a")]
 z_index = -1
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -1422.0
-offset_bottom = 296.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("1_gl6un")
-expand_mode = 1
-stretch_mode = 4
 
 [node name="WhiteBg" type="ColorRect" parent="."]
 z_index = -1

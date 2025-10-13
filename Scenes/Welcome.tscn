@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://2jnayay8fv7m"]
 
 [ext_resource type="Script" uid="uid://bucykmeetb4su" path="res://Scripts/Welcome.cs" id="1_058be"]
-[ext_resource type="Texture2D" uid="uid://dm1u1tu8uyrky" path="res://Assets/gui/menu/bg.png" id="2_30id6"]
+[ext_resource type="PackedScene" uid="uid://vepg08tntxpy" path="res://Scenes/gui/Background.tscn" id="2_a8035"]
 [ext_resource type="Texture2D" uid="uid://be5kmdn8cyqi3" path="res://Assets/gui/btn/faq.png" id="4_30id6"]
 [ext_resource type="PackedScene" uid="uid://drxh6sc78omsq" path="res://Scenes/gui/InteractiveIconButton.tscn" id="5_30id6"]
 [ext_resource type="Texture2D" uid="uid://gldmdm2ghti6" path="res://Assets/gui/btn/about.png" id="5_ooh06"]
@@ -19,20 +19,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_058be")
 
-[node name="Background" type="TextureRect" parent="."]
-z_index = -1
+[node name="Background" parent="." instance=ExtResource("2_a8035")]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -1422.0
-offset_bottom = 296.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("2_30id6")
-expand_mode = 1
-stretch_mode = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

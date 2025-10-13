@@ -25,3 +25,7 @@ window/stretch/aspect="expand"
 [dotnet]
 
 project/assembly_name="outline-quest"
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0.06666667, 0.22745098, 0.13725491, 1)

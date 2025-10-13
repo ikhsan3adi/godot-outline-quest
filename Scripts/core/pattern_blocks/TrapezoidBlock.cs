@@ -6,7 +6,7 @@ partial class TrapezoidBlock : PatternBlock
 
     public TrapezoidBlock(Vector2 cartesianPosition, Vector2? scale = null, float rotationDeg = 0, Color? color = null, bool? filled = false) : base(cartesianPosition, scale, rotationDeg, color, filled)
     {
-        Color = color ?? Colors.Yellow;
+        Color = color ?? Colors.Gold;
     }
 
     protected override void BuildOriginalVertices()
