@@ -42,6 +42,16 @@ public abstract partial class PatternBlock : Node2D
     }
 
     /// <summary>
+    /// Menentukan jumlah orientasi simetris yang valid untuk snapping.
+    /// 1 = Tidak simetris (trapezoid).
+    /// 2 = Simetri 180 derajat (rhombus & thin rhombus).
+    /// 3 = Simetri 120 derajat (triangle).
+    /// 4 = Simetri 90 derajat (square).
+    /// 6 = Simetri 60 derajat (hexagon).
+    /// </summary>
+    public virtual int RotationalSymmetry => 1;
+
+    /// <summary>
     /// blueprint dari bentuk sebelum di-transformasi.
     /// </summary>
     public List<Vector2> OriginalVertices { get; protected set; } = [];

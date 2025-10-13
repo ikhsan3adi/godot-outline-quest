@@ -187,29 +187,43 @@ public partial class GameManager : Node2D
             {
                 float distance = draggedBlock.CartesianPosition.DistanceTo(templateBlock.CartesianPosition);
 
-                float angleA = draggedBlock.RotationDeg;
-                float angleB = templateBlock.RotationDeg;
-                float angleDiff = Mathf.Abs(Mathf.RadToDeg(Mathf.AngleDifference(Mathf.DegToRad(angleA), Mathf.DegToRad(angleB))));
-
-                // snap berhasil
-                if (distance < SNAP_DISTANCE_THRESHOLD && angleDiff < SNAP_ANGLE_THRESHOLD)
+                // cek jarak
+                if (distance < SNAP_DISTANCE_THRESHOLD)
                 {
-                    templateBlock.SetFilled(true);
+                    int symmetryLevels = templateBlock.RotationalSymmetry;
+                    float symmetryAngle = 360f / symmetryLevels;
 
-                    draggedBlock.QueueFree();
-                    draggedBlock = null;
+                    // cek sudut rotasi
+                    for (int i = 0; i < symmetryLevels; i++)
+                    {
+                        float targetAngle = templateBlock.RotationDeg + (i * symmetryAngle);
 
-                    snapped = true;
+                        float angleDiff = Mathf.Abs(Mathf.RadToDeg(
+                            Mathf.AngleDifference(Mathf.DegToRad(draggedBlock.RotationDeg),
+                            Mathf.DegToRad(targetAngle))
+                        ));
 
-                    UpdateScoreOnSnap();
+                        // snap berhasil
+                        if (angleDiff < SNAP_ANGLE_THRESHOLD)
+                        {
+                            templateBlock.SetFilled(true);
 
-                    break;
+                            draggedBlock.QueueFree();
+                            draggedBlock = null;
+
+                            snapped = true;
+                            UpdateScoreOnSnap();
+
+                            break;
+                        }
+                    }
                 }
             }
+            if (snapped) break;
         }
 
         // snap gagal
-        if (!snapped)
+        if (!snapped && draggedBlock != null)
         {
             availableBlockCounts[draggedBlock.GetType()]++;
             UpdateHotbarUI();
