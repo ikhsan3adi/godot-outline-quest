@@ -25,21 +25,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 z_index = -1
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -793.333
-offset_bottom = 193.33374
+offset_top = -1422.0
+offset_bottom = 296.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 texture = ExtResource("1_gl6un")
-expand_mode = 5
+expand_mode = 1
 stretch_mode = 4
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="WhiteBg" type="ColorRect" parent="."]
 z_index = -1
 layout_mode = 1
 anchors_preset = 15

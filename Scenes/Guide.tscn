@@ -24,17 +24,20 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l2xgk")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
+z_index = -1
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -493.33337
-offset_bottom = 493.33337
+offset_top = -1422.0
+offset_bottom = 296.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 texture = ExtResource("2_st83v")
-expand_mode = 5
+expand_mode = 1
+stretch_mode = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
