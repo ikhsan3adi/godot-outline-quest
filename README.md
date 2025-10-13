@@ -15,6 +15,6 @@ Proyek komputer grafik yang dibuat menggunakan [Godot Engine](https://godotengin
 
 | Level 1                                         | Level 2                                                         | Level 3                                               |
 | ----------------------------------------------- | --------------------------------------------------------------- | ----------------------------------------------------- |
-| ![level-1](./.image/README/level-1.png)         | ![level-2](./.image/README/level-2.png)                         | Coming Soon                                           |
+| ![level-1](./.image/README/level-1.png)         | ![level-2](./.image/README/level-2.png)                         | ![level-3](./.image/README/level-3.png)               |
 | **How To Play**                                 | **Challenge Completed**                                         | **Game Completed**                                    |
 | ![how-to-play](./.image/README/how-to-play.png) | ![challenge-completed](./.image/README/challenge-completed.png) | ![game-completed](./.image/README/game-completed.png) |
