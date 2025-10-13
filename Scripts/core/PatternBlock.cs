@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public abstract partial class PatternBlock : Node2D
 {
-    public Color Color { get; set; } = Colors.White;
+    public virtual Color Color { get; set; } = Colors.White;
 
     /// <summary>
     /// panjang alas dari segitiga sama sisi (Triangle)

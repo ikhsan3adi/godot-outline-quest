@@ -6,9 +6,10 @@ partial class TriangleBlock : PatternBlock
 
     public override int RotationalSymmetry => 3;
 
+    public override Color Color { get; set; } = Colors.Orange;
+
     public TriangleBlock(Vector2 cartesianPosition, Vector2? scale = null, float rotationDeg = 0, Color? color = null, bool? filled = false) : base(cartesianPosition, scale, rotationDeg, color, filled)
     {
-        Color = color ?? Colors.Orange;
     }
 
     protected override void BuildOriginalVertices()

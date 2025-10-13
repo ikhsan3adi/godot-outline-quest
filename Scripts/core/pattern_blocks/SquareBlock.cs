@@ -6,9 +6,10 @@ partial class SquareBlock : PatternBlock
 
     public override int RotationalSymmetry => 4;
 
+    public override Color Color { get; set; } = Colors.MediumPurple;
+
     public SquareBlock(Vector2 cartesianPosition, Vector2? scale = null, float rotationDeg = 0, Color? color = null, bool? filled = false) : base(cartesianPosition, scale, rotationDeg, color, filled)
     {
-        Color = color ?? Colors.MediumPurple;
     }
 
     protected override void BuildOriginalVertices()
