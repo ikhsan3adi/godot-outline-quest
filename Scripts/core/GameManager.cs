@@ -19,7 +19,7 @@ public partial class GameManager : Node2D
     private readonly List<Challenge> challenges = [
         new AntChallenge(),
         new ButterflyChallenge(),
-        // new SpiderChallenge(),
+        new SpiderChallenge(),
     ];
 
     private int currentChallengeIndex = -1;
