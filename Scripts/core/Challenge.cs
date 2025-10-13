@@ -14,11 +14,6 @@ abstract public class Challenge
     /// </summary>
     public List<PatternBlock> PatternBlocks { get; protected set; } = [];
 
-    /// <summary>
-    /// Spawned dragged blocks
-    /// </summary>
-    public List<PatternBlock> PlacedPatternBlock { get; protected set; } = [];
-
     public GameStat stat = new GameStat();
 
     public ulong StartTimeMsec { get; private set; } // waktu mulai dalam milidetik
@@ -56,7 +51,6 @@ abstract public class Challenge
     public void ApplyTransformations(System.Numerics.Matrix4x4 matrix)
     {
         PatternBlocks.ForEach((pb) => pb.ApplyTransformations(matrix));
-        PlacedPatternBlock.ForEach((pb) => pb.ApplyTransformations(matrix));
     }
 
     public void StartChallenge()

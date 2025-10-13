@@ -23,11 +23,11 @@ public class ButterflyChallenge : Challenge
             ),
 
             // Antena
-            new DiamondBlock(
+            new ThinRhombusBlock(
                 new(TRIANGLE_H, 2 * BASE_LENGTH + TRIANGLE_H),
                 rotationDeg: 60
             ),
-            new DiamondBlock(
+            new ThinRhombusBlock(
                 new(-TRIANGLE_H, 2 * BASE_LENGTH + TRIANGLE_H),
                 rotationDeg: -60
             ),
@@ -73,7 +73,7 @@ public class ButterflyChallenge : Challenge
                 new(HALF_BASE + TRIANGLE_H + 2 * TRIANGLE_H / 3, -BASE_LENGTH),
                 rotationDeg: 90
             ),
-            new ParallelogramBlock(
+            new RhombusBlock(
                 new(HALF_BASE + TRIANGLE_H, -(BASE_LENGTH + HALF_BASE))
             ),
 
@@ -90,7 +90,7 @@ public class ButterflyChallenge : Challenge
                 new(-(HALF_BASE + TRIANGLE_H + 2 * TRIANGLE_H / 3), -BASE_LENGTH),
                 rotationDeg: -90
             ),
-            new ParallelogramBlock(
+            new RhombusBlock(
                 new(-(HALF_BASE + TRIANGLE_H), -(BASE_LENGTH + HALF_BASE))
             ),
         ];

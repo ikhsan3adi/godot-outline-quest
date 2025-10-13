@@ -74,20 +74,6 @@ public partial class GameManager : Node2D
 
     private readonly Dictionary<Type, Texture2D> iconCache = [];
 
-    public override void _Ready()
-    {
-        LoadBlockIcons();
-
-        GetViewport().SizeChanged += () =>
-        {
-            if (challengeContainer != null)
-                challengeContainer.Position = ScreenUtils.ConvertToPixel(0, 0);
-        };
-
-        gameOverlay.Hide();
-        GoToChallenge(0);
-    }
-
     /// <summary>
     /// muat semua ikon yang dibutuhkan dan cache.
     /// </summary>
@@ -192,64 +178,12 @@ public partial class GameManager : Node2D
         }
     }
 
-    public override void _Process(double delta)
-    {
-        if (draggedBlock != null)
-        {
-            Vector2 globalMousePos = GetGlobalMousePosition();
-            Vector2 localToContainerPos = challengeContainer.ToLocal(globalMousePos);
-
-            draggedBlock.CartesianPosition = new Vector2(localToContainerPos.X, -localToContainerPos.Y);
-        }
-
-        // untuk memperbarui timer
-        if (currentChallenge != null && currentChallenge.IsActive)
-        {
-            ulong currentTimeMsec = Time.GetTicksMsec();
-
-            double elapsedSeconds = (currentTimeMsec - currentChallenge.StartTimeMsec) / 1000.0;
-
-            TimeSpan time = TimeSpan.FromSeconds(elapsedSeconds);
-            string timerText = time.ToString(@"mm\:ss");
-
-            timerLabel.Text = timerText;
-        }
-    }
-
-    public override void _Input(InputEvent @event)
-    {
-        // rotasi dengan scroll wheel
-        if (draggedBlock != null && @event is InputEventMouseButton mouseEvent)
-        {
-            if (mouseEvent.ButtonIndex == MouseButton.WheelUp)
-            {
-                // CCW
-                draggedBlock.RotationDeg += ROTATION_INCREMENT_DEG;
-
-            }
-            else if (mouseEvent.ButtonIndex == MouseButton.WheelDown)
-            {
-                // CW
-                draggedBlock.RotationDeg -= ROTATION_INCREMENT_DEG;
-            }
-        }
-
-        // lepaskan/drop block yang sedang diseret
-        if (@event is InputEventMouseButton mouseButtonEvent && !mouseButtonEvent.Pressed && mouseButtonEvent.ButtonIndex == MouseButton.Left)
-        {
-            if (draggedBlock != null)
-            {
-                TrySnapDraggedBlock();
-            }
-        }
-    }
-
     private void TrySnapDraggedBlock()
     {
         bool snapped = false;
         foreach (var templateBlock in currentChallenge.PatternBlocks)
         {
-            if (!templateBlock.filled && templateBlock.GetType() == draggedBlock.GetType())
+            if (!templateBlock.Filled && templateBlock.GetType() == draggedBlock.GetType())
             {
                 float distance = draggedBlock.CartesianPosition.DistanceTo(templateBlock.CartesianPosition);
 
@@ -291,7 +225,7 @@ public partial class GameManager : Node2D
         scoreLabel.Text = $"{currentChallenge.stat.Score}";
 
         // Jika semua block di template sudah terisi, complete challenge
-        if (currentChallenge.PatternBlocks.All(block => block.filled))
+        if (currentChallenge.PatternBlocks.All(block => block.Filled))
         {
             GD.Print("LEVEL COMPLETE!");
             CompleteCurrentChallenge();
@@ -362,6 +296,72 @@ public partial class GameManager : Node2D
         levelCompletePanel.Hide();
         gameOverlay.Hide();
         GoToChallenge(currentChallengeIndex + 1);
+    }
+
+    public override void _Ready()
+    {
+        LoadBlockIcons();
+
+        GetViewport().SizeChanged += () =>
+        {
+            if (challengeContainer != null)
+                challengeContainer.Position = ScreenUtils.ConvertToPixel(0, 0);
+        };
+
+        gameOverlay.Hide();
+        GoToChallenge(0);
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        // rotasi dengan scroll wheel
+        if (draggedBlock != null && @event is InputEventMouseButton mouseEvent)
+        {
+            if (mouseEvent.ButtonIndex == MouseButton.WheelUp)
+            {
+                // CCW
+                draggedBlock.RotationDeg += ROTATION_INCREMENT_DEG;
+
+            }
+            else if (mouseEvent.ButtonIndex == MouseButton.WheelDown)
+            {
+                // CW
+                draggedBlock.RotationDeg -= ROTATION_INCREMENT_DEG;
+            }
+        }
+
+        // lepaskan/drop block yang sedang diseret
+        if (@event is InputEventMouseButton mouseButtonEvent && !mouseButtonEvent.Pressed && mouseButtonEvent.ButtonIndex == MouseButton.Left)
+        {
+            if (draggedBlock != null)
+            {
+                TrySnapDraggedBlock();
+            }
+        }
+    }
+
+    public override void _Process(double delta)
+    {
+        if (draggedBlock != null)
+        {
+            Vector2 globalMousePos = GetGlobalMousePosition();
+            Vector2 localToContainerPos = challengeContainer.ToLocal(globalMousePos);
+
+            draggedBlock.CartesianPosition = new Vector2(localToContainerPos.X, -localToContainerPos.Y);
+        }
+
+        // untuk memperbarui timer
+        if (currentChallenge != null && currentChallenge.IsActive)
+        {
+            ulong currentTimeMsec = Time.GetTicksMsec();
+
+            double elapsedSeconds = (currentTimeMsec - currentChallenge.StartTimeMsec) / 1000.0;
+
+            TimeSpan time = TimeSpan.FromSeconds(elapsedSeconds);
+            string timerText = time.ToString(@"mm\:ss");
+
+            timerLabel.Text = timerText;
+        }
     }
 
     public override void _ExitTree()

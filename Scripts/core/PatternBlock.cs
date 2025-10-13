@@ -52,35 +52,32 @@ public abstract partial class PatternBlock : Node2D
     public List<Vector2> Vertices { get; protected set; } = [];
 
     /// <summary>
-    /// Titik-titik outline, dipakai untuk membuat outline garis
+    /// Titik-titik outline, dipakai untuk membuat outline garis.
+    /// Tidak dipakai
     /// </summary>
     public List<Vector2> Points { get; protected set; } = [];
 
-    public bool filled { get; protected set; } = false;
+    public bool Filled { get; protected set; } = false;
 
     private static readonly Primitif primitif = new Primitif();
+
+    private static readonly BentukDasar bentukDasar = new BentukDasar();
 
     public PatternBlock(Vector2 cartesianPosition, Vector2? scale = null, float rotationDeg = 0, Color? color = null, bool? filled = false)
     {
         this.CartesianPosition = cartesianPosition;
         this.Scale = scale ?? this.Scale;
         this.Color = color ?? this.Color;
-        this.filled = filled ?? this.filled;
+        this.Filled = filled ?? this.Filled;
         this._rotationDeg = rotationDeg;
 
         BuildOriginalVertices();
         RecalculateTransform();
 
-        if (!this.filled)
-            BuildPoints();
+        //? tidak perlu, karena outline sudah di-handle di Challenge & TemplateOutlineNode
+        // if (!this.Filled) 
+        //     BuildPoints();
     }
-
-    public override void _Ready()
-    {
-        QueueRedraw();
-    }
-
-    protected abstract void BuildOriginalVertices();
 
     public void RecalculateTransform()
     {
@@ -91,58 +88,25 @@ public abstract partial class PatternBlock : Node2D
 
         TransformasiFast.ReflectionToX(ref matrix);
 
-        this.Vertices = TransformasiFast.GetTransformPoint(matrix, this.OriginalVertices);
+        ApplyTransformations(matrix);
+
         QueueRedraw();
-    }
-
-    protected virtual void BuildPoints()
-    {
-        Points.Clear();
-
-        for (int i = 0; i < Vertices.Count - 1; i++)
-        {
-            Vector2 a = Vertices[i];
-            Vector2 b = Vertices[i + 1];
-            Points.AddRange(primitif.LineBresenham(a.X, a.Y, b.X, b.Y));
-        }
-
-        Vector2 c = Vertices[Vertices.Count - 1];
-        Vector2 d = Vertices[0];
-        Points.AddRange(primitif.LineBresenham(c.X, c.Y, d.X, d.Y));
     }
 
     /// <summary>
     /// Menerapkan matriks transformasi ke vertex ORIGINAL.
+    /// Hasilnya disimpan di Vertices.
     /// </summary>
-    /// <param name="matrix">Matriks Kompostit</param>
+    /// <param name="matrix">Matriks Komposit</param>
     public void ApplyTransformations(System.Numerics.Matrix4x4 matrix)
     {
         if (matrix != System.Numerics.Matrix4x4.Identity)
         {
-            Vertices = TransformasiFast.GetTransformPoint(matrix, OriginalVertices);
+            this.Vertices = TransformasiFast.GetTransformPoint(matrix, OriginalVertices);
         }
-
-        if (!this.filled)
-            BuildPoints();
-
-        QueueRedraw();
     }
 
-    public override void _Draw()
-    {
-        if (Vertices.Count == 0) return;
-
-        if (this.filled)
-            DrawPolygon();
-        else
-            DrawWhitePolygon();
-    }
-
-    /// unused
-    private void DrawLines()
-    {
-        GraphicsUtils.PutPixelAll(this, Points, GraphicsUtils.DrawStyle.DotDot, Color);
-    }
+    protected abstract void BuildOriginalVertices();
 
     private void DrawPolygon()
     {
@@ -156,9 +120,42 @@ public abstract partial class PatternBlock : Node2D
 
     public void SetFilled(bool isFilled)
     {
-        this.filled = isFilled;
+        this.Filled = isFilled;
 
         QueueRedraw();
+    }
+
+    /// <summary>
+    /// unused
+    /// </summary>
+    protected virtual void BuildPoints()
+    {
+        Points.Clear();
+
+        Points.AddRange(bentukDasar.Polygon(this.Vertices));
+    }
+
+    /// <summary>
+    /// unused
+    /// </summary>
+    private void DrawLines()
+    {
+        GraphicsUtils.PutPixelAll(this, Points, GraphicsUtils.DrawStyle.DotDot, Color);
+    }
+
+    public override void _Ready()
+    {
+        QueueRedraw();
+    }
+
+    public override void _Draw()
+    {
+        if (Vertices.Count == 0) return;
+
+        if (this.Filled)
+            DrawPolygon();
+        else
+            DrawWhitePolygon();
     }
 
     public override void _ExitTree()

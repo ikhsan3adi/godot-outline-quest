@@ -9,17 +9,17 @@ public class AntChallenge : Challenge
             new HexagonBlock(new (0, PatternBlock.BASE_LENGTH * 2), rotationDeg: -30),
 
             // kaki kanan
-            new DiamondBlock(new(
+            new ThinRhombusBlock(new(
                     PatternBlock.BASE_LENGTH + PatternBlock.TRIANGLE_HEIGHT / 2 - PatternBlock.BASE_LENGTH / 20,
                     PatternBlock.BASE_LENGTH
                 ), rotationDeg: 24
             ),
-            new DiamondBlock(new(
+            new ThinRhombusBlock(new(
                     PatternBlock.BASE_LENGTH + PatternBlock.TRIANGLE_HEIGHT / 2,
                     0
                 )
             ),
-            new DiamondBlock(new(
+            new ThinRhombusBlock(new(
                     PatternBlock.BASE_LENGTH + PatternBlock.TRIANGLE_HEIGHT / 2 - PatternBlock.BASE_LENGTH / 20,
                     -PatternBlock.BASE_LENGTH
                 ),
@@ -27,17 +27,17 @@ public class AntChallenge : Challenge
             ),
 
             // kaki kiri
-            new DiamondBlock(new(
+            new ThinRhombusBlock(new(
                     -(PatternBlock.BASE_LENGTH + PatternBlock.TRIANGLE_HEIGHT / 2 - PatternBlock.BASE_LENGTH / 20),
                     PatternBlock.BASE_LENGTH
                 ), rotationDeg: -24
             ),
-            new DiamondBlock(new(
+            new ThinRhombusBlock(new(
                     -(PatternBlock.BASE_LENGTH + PatternBlock.TRIANGLE_HEIGHT / 2),
                     0
                 )
             ),
-            new DiamondBlock(new(
+            new ThinRhombusBlock(new(
                     -(PatternBlock.BASE_LENGTH + PatternBlock.TRIANGLE_HEIGHT / 2 - PatternBlock.BASE_LENGTH / 20),
                     -PatternBlock.BASE_LENGTH
                 ),
