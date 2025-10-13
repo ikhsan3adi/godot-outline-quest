@@ -8,7 +8,10 @@ public class ButterflyChallenge : Challenge
         const float HALF_BASE = BASE_LENGTH / 2;
         float TRIANGLE_H = PatternBlock.TRIANGLE_HEIGHT;
 
-        Vector2 bottomTrapezoidCenter = calculateCenterTrapezoid(150f);
+        // calculate position for right trapezoid 
+        float rad30deg = Mathf.DegToRad(30);
+        float xTrapezoid = HALF_BASE + TRIANGLE_H - (Mathf.Sin(rad30deg) * TRIANGLE_H / 2);
+        float yTrapezoid = -(Mathf.Cos(rad30deg) * TRIANGLE_H / 2);
 
         PatternBlocks =
         [
@@ -62,7 +65,7 @@ public class ButterflyChallenge : Challenge
 
             // Sayap kanan bawah
             new TrapezoidBlock(
-                bottomTrapezoidCenter,
+                new (xTrapezoid, yTrapezoid),
                 rotationDeg: 150
             ),
             new TriangleBlock(
@@ -79,7 +82,7 @@ public class ButterflyChallenge : Challenge
 
             // Sayap kiri bawah
             new TrapezoidBlock(
-                new(-bottomTrapezoidCenter.X, bottomTrapezoidCenter.Y),
+                new (-xTrapezoid, yTrapezoid),
                 rotationDeg: -150
             ),
             new TriangleBlock(
@@ -96,20 +99,5 @@ public class ButterflyChallenge : Challenge
         ];
 
         BuildOutlines();
-    }
-
-    private static Vector2 calculateCenterTrapezoid(float deg)
-    {
-        float rotationRad = Mathf.DegToRad(deg);
-        float halfBase = PatternBlock.BASE_LENGTH / 2;
-        float halfTriHeight = PatternBlock.TRIANGLE_HEIGHT / 2;
-
-        Vector2 contactVertex = new(halfBase, halfTriHeight);
-
-        float minRotatedX = contactVertex.X * Mathf.Cos(rotationRad) - contactVertex.Y * Mathf.Sin(rotationRad);
-
-        float centerX = halfBase - minRotatedX;
-
-        return new Vector2(centerX, -halfTriHeight + 4.65f);
     }
 }
