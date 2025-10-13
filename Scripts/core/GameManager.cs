@@ -330,6 +330,21 @@ public partial class GameManager : Node2D
             }
         }
 
+        // rotasi dengan arrow keys
+        if (draggedBlock != null && @event is InputEventKey keyEvent && keyEvent.Pressed)
+        {
+            if (keyEvent.Keycode == Key.Up || keyEvent.Keycode == Key.Left)
+            {
+                // CCW
+                draggedBlock.RotationDeg += ROTATION_INCREMENT_DEG;
+            }
+            else if (keyEvent.Keycode == Key.Down || keyEvent.Keycode == Key.Right)
+            {
+                // CW
+                draggedBlock.RotationDeg -= ROTATION_INCREMENT_DEG;
+            }
+        }
+
         // lepaskan/drop block yang sedang diseret
         if (@event is InputEventMouseButton mouseButtonEvent && !mouseButtonEvent.Pressed && mouseButtonEvent.ButtonIndex == MouseButton.Left)
         {
