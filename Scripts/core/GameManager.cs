@@ -262,24 +262,32 @@ public partial class GameManager : Node2D
         }
         else
         {
-            TimeSpan time = TimeSpan.FromSeconds(currentChallenge.stat.ElapsedTimeSeconds);
-            string timerText = time.ToString(@"mm\:ss");
-
-            levelCompleteScoreLabel.Text = $"{currentChallenge.stat.Score}";
-            levelCompleteTimeLabel.Text = timerText;
-
-            levelCompletePanel.Show();
-            gameOverlay.Show();
+            ShowStats();
         }
+    }
+
+    private void ShowStats()
+    {
+        TimeSpan time = TimeSpan.FromSeconds(currentChallenge.stat.ElapsedTimeSeconds);
+        string timerText = time.ToString(@"mm\:ss");
+
+        levelCompleteScoreLabel.Text = $"{currentChallenge.stat.Score}";
+        levelCompleteTimeLabel.Text = timerText;
+
+        levelCompletePanel.Show();
+        gameOverlay.Show();
     }
 
     private void ShowFinalStats()
     {
+        TimeSpan time = TimeSpan.FromSeconds(currentChallenge.stat.ElapsedTimeSeconds);
+        string timerText = time.ToString(@"mm\:ss");
+
         TimeSpan totalTime = TimeSpan.FromSeconds(_totalStats.ElapsedTimeSeconds);
         string totalTimeText = totalTime.ToString(@"mm\:ss");
 
-        gameCompleteScoreLabel.Text = $"{_totalStats.Score}";
-        gameCompleteTimeLabel.Text = totalTimeText;
+        gameCompleteScoreLabel.Text = $"{currentChallenge.stat.Score}\n(Total {_totalStats.Score})";
+        gameCompleteTimeLabel.Text = $"{timerText} (Total {totalTimeText})";
 
         gameCompletePanel.Show();
         gameOverlay.Show();
