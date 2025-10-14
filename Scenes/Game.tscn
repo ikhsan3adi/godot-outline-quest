@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://cyrjndv2upu34"]
+[gd_scene load_steps=20 format=3 uid="uid://cyrjndv2upu34"]
 
 [ext_resource type="PackedScene" uid="uid://vepg08tntxpy" path="res://Scenes/gui/Background.tscn" id="1_alh3a"]
 [ext_resource type="Script" uid="uid://c6xygk0ukcxsy" path="res://Scripts/core/GameManager.cs" id="1_iukft"]
 [ext_resource type="PackedScene" uid="uid://hmxmhruwosai" path="res://Scenes/core/HotbarItem.tscn" id="3_j5yw3"]
 [ext_resource type="Texture2D" uid="uid://4kbrwtbrt7io" path="res://Assets/gui/rating/bg.png" id="4_kldst"]
+[ext_resource type="Script" uid="uid://jvgo6tnmdo8h" path="res://Scripts/PerformanceCounter.cs" id="5_4q8tf"]
 [ext_resource type="PackedScene" uid="uid://drxh6sc78omsq" path="res://Scenes/gui/InteractiveIconButton.tscn" id="5_7lihs"]
 [ext_resource type="Texture2D" uid="uid://voujn32ond0k" path="res://Assets/gui/btn/pause.png" id="6_fgofq"]
 [ext_resource type="Texture2D" uid="uid://7jnen4u7cdvd" path="res://Assets/gui/bubble/table.png" id="7_bf53h"]
@@ -12,7 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://ddyee7b8fk8bp" path="res://Assets/gui/upgrade/star.png" id="10_71axn"]
 [ext_resource type="PackedScene" uid="uid://gwv7s0yte7b4" path="res://Scenes/gui/MenuTitle.tscn" id="11_3so38"]
 [ext_resource type="Texture2D" uid="uid://dqkgsulcb4rk8" path="res://Assets/gui/btn/play.png" id="12_3cx6b"]
+[ext_resource type="Texture2D" uid="uid://drjkoti66twja" path="res://Assets/gui/settings/96.png" id="12_8r6kd"]
 [ext_resource type="Texture2D" uid="uid://cctu3fucnqab8" path="res://Assets/gui/shop/bg.png" id="13_acvyw"]
+[ext_resource type="Texture2D" uid="uid://d367nblg5uyuq" path="res://Assets/gui/settings/95.png" id="13_tfod6"]
 [ext_resource type="PackedScene" uid="uid://ct7pa6iarcpky" path="res://Scenes/gui/InteractiveTextButton.tscn" id="14_alh3a"]
 [ext_resource type="Texture2D" uid="uid://dnljyqevh0tnd" path="res://Assets/gui/btn/menu.png" id="15_4q8tf"]
 [ext_resource type="Texture2D" uid="uid://dyjhkyfo0r6iq" path="res://Assets/gui/shop/table.png" id="15_alh3a"]
@@ -253,6 +256,66 @@ theme_override_font_sizes/font_size = 48
 text = "Level
 3"
 horizontal_alignment = 1
+
+[node name="PerformanceDisplayContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 182.0
+offset_top = -86.0
+offset_right = 501.0
+offset_bottom = -5.0
+grow_vertical = 0
+alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PerformanceDisplayContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+
+[node name="PerformanceDisplay" type="HBoxContainer" parent="Control/PerformanceDisplayContainer/MarginContainer" node_paths=PackedStringArray("toggleDisplayButton", "fpsLabel", "latencyLabel")]
+layout_mode = 2
+theme_override_constants/separation = 8
+script = ExtResource("5_4q8tf")
+toggleDisplayButton = NodePath("../../PerformanceToggleCheckButton")
+fpsLabel = NodePath("FpsLabel")
+latencyLabel = NodePath("LatencyLabel")
+
+[node name="FpsLabel" type="Label" parent="Control/PerformanceDisplayContainer/MarginContainer/PerformanceDisplay"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.06666667, 0.22745098, 0.13725491, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("8_71axn")
+theme_override_font_sizes/font_size = 24
+text = "FPS: -"
+
+[node name="LatencyLabel" type="Label" parent="Control/PerformanceDisplayContainer/MarginContainer/PerformanceDisplay"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.06666667, 0.22745098, 0.13725491, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("8_71axn")
+theme_override_font_sizes/font_size = 24
+text = "Latency: -"
+
+[node name="PerformanceToggleCheckButton" type="CheckButton" parent="Control/PerformanceDisplayContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.06666667, 0.22745098, 0.13725491, 1)
+theme_override_colors/font_focus_color = Color(0.1254902, 0.4392157, 0.28235295, 1)
+theme_override_colors/font_pressed_color = Color(0.06666667, 0.22745098, 0.13725491, 1)
+theme_override_colors/font_hover_color = Color(0.1254902, 0.4392157, 0.28235295, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.06666667, 0.22745098, 0.13725491, 1)
+theme_override_colors/font_disabled_color = Color(0.06666667, 0.22745098, 0.13725491, 1)
+theme_override_constants/h_separation = 8
+theme_override_constants/icon_max_width = 64
+theme_override_fonts/font = ExtResource("8_71axn")
+theme_override_font_sizes/font_size = 24
+theme_override_icons/checked = ExtResource("12_8r6kd")
+theme_override_icons/unchecked = ExtResource("13_tfod6")
+theme_override_icons/checked_disabled = ExtResource("12_8r6kd")
+theme_override_icons/unchecked_disabled = ExtResource("13_tfod6")
+text = "Performance Display"
 
 [node name="GameOverlay" type="CanvasLayer" parent="."]
 process_mode = 3
