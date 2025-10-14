@@ -256,14 +256,7 @@ public partial class GameManager : Node2D
         _totalStats.ElapsedTimeSeconds += currentChallenge.stat.ElapsedTimeSeconds;
         _totalStats.Score += currentChallenge.stat.Score;
 
-        if (currentChallengeIndex + 1 >= challenges.Count)
-        {
-            ShowFinalStats();
-        }
-        else
-        {
-            ShowStats();
-        }
+        ShowStats();
     }
 
     private void ShowStats()
@@ -280,14 +273,11 @@ public partial class GameManager : Node2D
 
     private void ShowFinalStats()
     {
-        TimeSpan time = TimeSpan.FromSeconds(currentChallenge.stat.ElapsedTimeSeconds);
-        string timerText = time.ToString(@"mm\:ss");
-
         TimeSpan totalTime = TimeSpan.FromSeconds(_totalStats.ElapsedTimeSeconds);
         string totalTimeText = totalTime.ToString(@"mm\:ss");
 
-        gameCompleteScoreLabel.Text = $"{currentChallenge.stat.Score}\n(Total {_totalStats.Score})";
-        gameCompleteTimeLabel.Text = $"{timerText} (Total {totalTimeText})";
+        gameCompleteScoreLabel.Text = $"{_totalStats.Score}";
+        gameCompleteTimeLabel.Text = $"{totalTimeText}";
 
         gameCompletePanel.Show();
         gameOverlay.Show();
@@ -316,8 +306,16 @@ public partial class GameManager : Node2D
     private void OnNextLevelButtonPressed()
     {
         levelCompletePanel.Hide();
-        gameOverlay.Hide();
-        GoToChallenge(currentChallengeIndex + 1);
+
+        if (currentChallengeIndex + 1 >= challenges.Count)
+        {
+            ShowFinalStats();
+        }
+        else
+        {
+            gameOverlay.Hide();
+            GoToChallenge(currentChallengeIndex + 1);
+        }
     }
 
     public override void _Ready()
