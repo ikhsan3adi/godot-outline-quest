@@ -1,4 +1,4 @@
-# Proyek Godot ETS Komputer Grafik: Outline Quest - Permainan Pattern Block Activity
+# Outline Quest - Permainan Pattern Block Activity
 
 ![preview-menu](./.image/README/preview-menu.png)
 
